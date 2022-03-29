@@ -1,0 +1,25 @@
+{
+  "name": "sysinfo",
+  "productName": "sysinfo",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": {
+    "name": "shulu",
+    "email": "961085397@qq.com"
+  },
+  "license": "MIT",
+  "config": {},
+  "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "systeminformation": "^5.11.9"
+  },
+  "devDependencies": {
+    "electron": "17.2.0"
+  }
+}
