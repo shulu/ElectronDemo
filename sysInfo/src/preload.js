@@ -1,6 +1,8 @@
 const { contextBridge, ipcRenderer } = require("electron");
 var os = require('os');
 var process = require('child_process');
+const http = require('http')
+
 
 //referer: https://www.88cto.com/article/1f2OU7Xl
 function getGraphics() {
@@ -31,8 +33,42 @@ function getGraphics() {
         }));
     })
 }
+
+function reportSysInfo(data) {
+    const params = JSON.stringify(data)
+
+    const options = {
+        hostname: 'localhost',
+        port: 80,
+        path: '/reportSys.php',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': params.length,
+        },
+    }
+
+    const req = http.request(options, (res) => {
+        console.log(`statusCode: ${res.statusCode}`)
+
+        res.on('params', (d) => {
+            process.stdout.write(d)
+        })
+    })
+
+    req.on('error', (error) => {
+        console.error(error)
+    })
+
+    req.write(params)
+    req.end()
+}
+
+
 contextBridge.exposeInMainWorld("api", {
     getOsInfo: () => os.cpus(),
     getMem: () => os.totalmem(),
-    getGraphic: () => getGraphics()
+    getGraphic: () => getGraphics(),
+    report: (data) => reportSysInfo(data)
 })
+

@@ -1,11 +1,11 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-require("electron-reload")(__dirname)
+// require("electron-reload")(__dirname)
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
-  // eslint-disable-line global-require
-  app.quit();
-}
+// if (require('electron-squirrel-startup')) {
+//   // eslint-disable-line global-require
+//   app.quit();
+// }
 
 const createWindow = () => {
   // Create the browser window.
@@ -13,19 +13,19 @@ const createWindow = () => {
     width: 800,
     height: 600,
     frame: true,
-    autoHideMenuBar: false,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: __dirname + "//preload.js"
     },
     transparent: false,
-    alwaysOnTop: false
+    alwaysOnTop: true
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished

@@ -5,7 +5,9 @@
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack-win": "electron-packager . sysinfo --overwrite --platform=win32 --arch=x64 --icon=assets/icons/win/icon.ico --prune=true --ignore=node_module --out=./release-builds",
+    "pack-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=./release-builds"
   },
   "keywords": [],
   "author": {
@@ -16,8 +18,7 @@
   "config": {},
   "dependencies": {
     "electron-reload": "^2.0.0-alpha.1",
-    "electron-squirrel-startup": "^1.0.0",
-    "systeminformation": "^5.11.9"
+    "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
     "electron": "17.2.0"

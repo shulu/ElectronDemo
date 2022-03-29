@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "electron .",
-    "pack-win": "electron-packager . overlay --overwrite --asar=true --platform=win32 --arch=x64 --icon=assets/icons/win/icon.ico --prune=true --out=./release-builds",
+    "pack-win": "electron-packager . overlay --overwrite --platform=win32 --arch=x64 --icon=assets/icons/win/icon.ico --prune=true --ignore=node_module --out=./release-builds",
     "pack-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=./release-builds"
   },
   "keywords": [],
@@ -17,11 +17,10 @@
   "license": "MIT",
   "config": {},
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
+    "electron-reload": "^2.0.0-alpha.1",
     "systeminformation": "^5.11.8"
   },
   "devDependencies": {
-    "electron": "17.2.0",
-    "electron-packager": "^15.4.0"
+    "electron": "17.2.0"
   }
 }
