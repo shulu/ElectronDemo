@@ -1,0 +1,21 @@
+{
+  "name": "electron-basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec electron . --watch ./ --ext .js,.html,.css,.vue",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^23.2.1"
+  },
+  "dependencies": {
+    "electron-win-state": "^1.1.22",
+    "fs": "^0.0.1-security",
+    "install": "^0.13.0"
+  }
+}

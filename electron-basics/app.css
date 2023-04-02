@@ -1,0 +1,13 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    /* user-select: none; */
+    -webkit-app-region: none;
+}
+
+input {
+    -webkit-app-region: none;
+}
