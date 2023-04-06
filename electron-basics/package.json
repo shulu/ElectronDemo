@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -d 2 -V --watch ./ --ext .js,.html,.css,.vue --exec electron  . --trace-warnings ...",
+    "start": "nodemon -d 5 -V --watch ./ --ext .js,.html,.css,.vue --exec electron  . --trace-warnings ...",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

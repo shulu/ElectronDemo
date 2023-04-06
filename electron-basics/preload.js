@@ -1,13 +1,34 @@
-console.log(process.platform)
+console.log(process.platform);
 
-const  {contextBridge, ipcRenderer} = require('electron')
+const { contextBridge, ipcRenderer, clipboard } = require("electron");
+
+let platform = process.platform;
 
 const handleSend = () => {
-    ipcRenderer.invoke('send-event', 'hahaha')
-}
+  ipcRenderer.invoke("send-event", "hahaha");
+};
 
-contextBridge.exposeInMainWorld('myapi', {
-    platform:process.platform,
-    handleSend
-})
+const copyBoard = () => {
+  if (platform == "darwin") {
+    clipboard.writeFindText("hello");
+  } else {
+    clipboard.writeText("hello");
+  }
+};
 
+const showCopy = () => {
+  const text = "";
+  if (platform == "darwin") {
+    text = clipboard.readFindText();
+  } else {
+    text = clipboard.readText();
+  }
+  console.log(text);
+};
+
+contextBridge.exposeInMainWorld("myApi", {
+  platform: process.platform,
+  handleSend,
+  copyBoard,
+  showCopy,
+});
