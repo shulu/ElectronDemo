@@ -2,9 +2,9 @@
  * @Author: shulu
  * @Date: 2023-04-01 22:56:02
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-05 23:36:06
+ * @LastEditTime: 2023-04-07 10:56:42
  * @Description: file content
- * @FilePath: \electron-basics\index.js
+ * @FilePath: /electron-basics/index.js
  */
 const path = require("path");
 const {
@@ -56,7 +56,7 @@ const mainWindow = () => {
   win.loadFile("./index.html");
   // win.loadURL('https://www.github.com')
   const wc = win.webContents;
-  // wc.openDevTools({ mode: "bottom", activate: true });
+  wc.openDevTools({ mode: "bottom", activate: true });
   wc.on("did-finish-load", () => {
     console.log("finish");
   });
