@@ -17,5 +17,4 @@ import Dialog from "./Dialog.vue";
     <Dialog />
   </main>
 </template>
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

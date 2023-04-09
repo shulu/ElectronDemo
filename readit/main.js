@@ -2,9 +2,9 @@
  * @Author: shulu
  * @Date: 2023-04-07 14:31:24
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-07 16:22:22
+ * @LastEditTime: 2023-04-09 21:54:55
  * @Description: file content
- * @FilePath: /readit/main.js
+ * @FilePath: \readit\main.js
  */
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
@@ -29,7 +29,7 @@ const createWindow = () => {
     winState.saveState(mainWindow);
   });
   mainWindow.loadURL("http://localhost:5173/");
-  mainWindow.webContents.openDevTools({ mode: "right", activate: true });
+  mainWindow.webContents.openDevTools({ mode: "bottom", activate: true });
   winState.manage(mainWindow);
 };
 

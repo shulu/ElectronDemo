@@ -2,9 +2,9 @@
  * @Author: shulu
  * @Date: 2023-04-07 15:57:05
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-07 17:36:42
+ * @LastEditTime: 2023-04-09 22:03:29
  * @Description: file content
- * @FilePath: /readit/src/views/SearchBar.vue
+ * @FilePath: \readit\src\views\SearchBar.vue
 -->
 <script setup lang="ts">
 import { ref, inject } from "vue";
@@ -13,7 +13,7 @@ const { isShow, setIsShow } = inject('dialog-show')
 <template>
   <div class="search-container">
     <div class="button"
-         @click="setIsShow(!isShow.value)">+</div>
+         @click="setIsShow(true)">+</div>
     <div class="input">
       <input type="text"
              name=""
