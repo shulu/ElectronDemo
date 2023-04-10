@@ -2,7 +2,7 @@
  * @Author: shulu
  * @Date: 2023-04-07 16:22:35
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-09 22:18:38
+ * @LastEditTime: 2023-04-10 21:01:10
  * @Description: file content
  * @FilePath: \readit\src\views\Dialog.vue
 -->
@@ -48,7 +48,7 @@ const { isShow, setIsShow } = inject('dialog-show')
         flex-direction: column;
 
         .input {
-            flex: 1;
+            // flex: 1;
             height: 3em;
             padding: 0 10px;
             border: 1px solod #ccc;
