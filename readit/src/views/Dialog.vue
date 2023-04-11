@@ -2,7 +2,7 @@
  * @Author: shulu
  * @Date: 2023-04-07 16:22:35
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-10 21:01:10
+ * @LastEditTime: 2023-04-11 23:07:34
  * @Description: file content
  * @FilePath: \readit\src\views\Dialog.vue
 -->
@@ -10,6 +10,13 @@
 import { ref, inject } from 'vue';
 
 const { isShow, setIsShow } = inject('dialog-show')
+
+const url = ref('')
+
+const handleAddClick = async () => {
+    const result = await mainApi.sendUrl(url.value)
+    console.log(result)
+}
 </script>
 <template>
     <div class="dialog-wrap"
@@ -19,10 +26,12 @@ const { isShow, setIsShow } = inject('dialog-show')
                 <input type="text"
                        name=""
                        id=""
+                       v-model="url"
                        placeholder="请输入网址">
             </div>
             <div class="button">
-                <button class="add">新增</button>
+                <button class="add"
+                        @click="handleAddClick">新增</button>
                 <button class="cancel"
                         @click="setIsShow(false)">取消</button>
             </div>
