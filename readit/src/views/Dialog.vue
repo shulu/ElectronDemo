@@ -2,38 +2,35 @@
  * @Author: shulu
  * @Date: 2023-04-07 16:22:35
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-11 23:07:34
+ * @LastEditTime: 2023-04-17 21:57:48
  * @Description: file content
  * @FilePath: \readit\src\views\Dialog.vue
 -->
 <script setup lang="ts">
-import { ref, inject } from 'vue';
+import useWebSiteStore from '@/store/websiteStore';
+import { inject, ref } from 'vue';
+const websiteStore = useWebSiteStore();
+const { isShow, setIsShow } = inject('dialog-show');
 
-const { isShow, setIsShow } = inject('dialog-show')
-
-const url = ref('')
-
+const url = ref('');
+const isSubmit = ref(false);
 const handleAddClick = async () => {
-    const result = await mainApi.sendUrl(url.value)
-    console.log(result)
-}
+    isSubmit.value = true;
+    const result = await mainApi.sendUrl(url.value);
+    websiteStore.add(result);
+    isSubmit.value = false;
+    setIsShow(false);
+};
 </script>
 <template>
-    <div class="dialog-wrap"
-         v-if="isShow">
+    <div class="dialog-wrap" v-if="isShow">
         <div class="content">
             <div class="input">
-                <input type="text"
-                       name=""
-                       id=""
-                       v-model="url"
-                       placeholder="请输入网址">
+                <input type="text" name="" id="" v-model="url" placeholder="请输入网址" :disabled="isSubmit" />
             </div>
             <div class="button">
-                <button class="add"
-                        @click="handleAddClick">新增</button>
-                <button class="cancel"
-                        @click="setIsShow(false)">取消</button>
+                <button class="add" @click="handleAddClick" :disabled="isSubmit">新增</button>
+                <button class="cancel" @click="setIsShow(false)" :disabled="isSubmit">取消</button>
             </div>
         </div>
     </div>
@@ -91,7 +88,6 @@ const handleAddClick = async () => {
                 background-color: aqua;
             }
         }
-
     }
 }
 </style>

@@ -2,29 +2,39 @@
  * @Author: shulu
  * @Date: 2023-04-07 17:30:50
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-11 22:12:46
+ * @LastEditTime: 2023-04-17 23:25:32
  * @Description: file content
  * @FilePath: \readit\src\views\List.vue
 -->
 <script setup lang="ts">
-import { ref } from 'vue';
+import useWebSiteStore from '@/store/websiteStore';
+import { onMounted } from 'vue';
+
+const websiteStore = useWebSiteStore();
+const changeSelected = (index: number) => {
+    websiteStore.nowSelected = index;
+};
+const removeWebsite = (item) => {
+    websiteStore.rmWebsites(item);
+};
+onMounted(() => {
+    websiteStore.initSites();
+});
 </script>
 <template>
     <div>
-        <div class="no-items"
-             v-if="false">暂无数据</div>
-        <div class="item">
-            <div class="read-item  selected">
-                <img src="http://placekitten.com/100/50"
-                     alt="">
-                <h2>百度一下 你就知道</h2>
-                <button>X</button>
-            </div>
-            <div class="read-item">
-                <img src="http://placekitten.com/100/50"
-                     alt="">
-                <h2>百度一下 你就知道</h2>
-                <button>X</button>
+        <div class="no-items" v-if="websiteStore.websites.length < 1">暂无数据</div>
+        <div class="item" v-else>
+            <div
+                class="read-item"
+                :class="{ selected: websiteStore.nowSelected == index }"
+                v-for="(ws, index) in websiteStore.websites"
+                :key="index"
+                @click="changeSelected(index)"
+            >
+                <img :src="ws.screenShot" alt="" />
+                <h2>{{ ws.title }}</h2>
+                <button @click="removeWebsite(ws)">X</button>
             </div>
         </div>
     </div>
