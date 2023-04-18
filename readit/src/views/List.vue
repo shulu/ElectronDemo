@@ -2,7 +2,7 @@
  * @Author: shulu
  * @Date: 2023-04-07 17:30:50
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-17 23:25:32
+ * @LastEditTime: 2023-04-18 21:54:27
  * @Description: file content
  * @FilePath: \readit\src\views\List.vue
 -->
@@ -22,7 +22,7 @@ onMounted(() => {
 });
 </script>
 <template>
-    <div>
+    <div class="all-item">
         <div class="no-items" v-if="websiteStore.websites.length < 1">暂无数据</div>
         <div class="item" v-else>
             <div
@@ -40,6 +40,9 @@ onMounted(() => {
     </div>
 </template>
 <style lang="scss">
+.all-item {
+    margin-top: 60px;
+}
 .no-item {
     font-weight: bold;
     color: silver;
