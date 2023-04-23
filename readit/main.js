@@ -2,14 +2,13 @@
  * @Author: shulu
  * @Date: 2023-04-07 14:31:24
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-18 21:32:41
+ * @LastEditTime: 2023-04-20 17:13:51
  * @Description: file content
  * @FilePath: \readit\main.js
  */
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const WinState = require('electron-win-state').default;
-
 require('./controller/captureUrl');
 require('./controller/alert');
 

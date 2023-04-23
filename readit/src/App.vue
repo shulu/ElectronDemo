@@ -2,7 +2,7 @@
  * @Author: shulu
  * @Date: 2023-04-07 15:54:42
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-17 23:10:16
+ * @LastEditTime: 2023-04-22 21:01:16
  * @Description: file content
  * @FilePath: \readit\src\App.vue
 -->
@@ -10,10 +10,13 @@
 import { provide, ref } from 'vue';
 import Home from './views/Home.vue';
 const isShow = ref(false);
+const webUrl = ref('');
 const setIsShow = (val: boolean) => {
     isShow.value = val;
+    webUrl.value = !val ? '' : webUrl.value;
 };
 provide('dialog-show', {
+    webUrl,
     isShow,
     setIsShow,
 });

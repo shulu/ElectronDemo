@@ -2,7 +2,7 @@
  * @Author: shulu
  * @Date: 2023-04-17 21:17:06
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-18 21:57:46
+ * @LastEditTime: 2023-04-23 23:31:31
  * @Description: file content
  * @FilePath: \readit\src\store\websiteStore.ts
  */
@@ -21,7 +21,15 @@ const useWebSiteStore = defineStore('websiteStore', {
         return {
             websites: [] as IWebContens[],
             nowSelected: 0,
+            findName: '',
         };
+    },
+    getters: {
+        findWebsites(state): IWebContens[] | any {
+            return state.findName.length > 0
+                ? state.websites.find((web) => (web.title = state.findName))
+                : state.websites;
+        },
     },
     actions: {
         add(item: IWebContens) {
@@ -35,6 +43,13 @@ const useWebSiteStore = defineStore('websiteStore', {
         rmWebsites(item: IWebContens) {
             this.websites = this.websites.filter((val) => val.url != item.url);
             store.local.set('websites', this.websites);
+        },
+        filterWebSites(name: string) {
+            if (name.length > 0) {
+                this.websites = this.websites.filter((val) => val.title.toLowerCase().includes(name));
+            } else {
+                this.websites = store.local.get('websites');
+            }
         },
         initSites() {
             this.websites = store.local.get('websites') ?? [];

@@ -2,19 +2,31 @@
  * @Author: shulu
  * @Date: 2023-04-07 15:57:05
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-18 21:53:12
+ * @LastEditTime: 2023-04-23 23:20:51
  * @Description: file content
  * @FilePath: \readit\src\views\SearchBar.vue
 -->
 <script setup lang="ts">
+import _ from 'lodash';
+import { watch, ref } from 'vue';
+import useWebSites from '@/controller/useWebSites';
 import { inject } from 'vue';
 const { isShow, setIsShow } = inject('dialog-show');
+// 方式1
+// const { filterWebSites } = useWebSites();
+// const webTitle = ref('');
+// watch(webTitle, () => {
+//     filterWebSites(webTitle.value);
+// });
+//方式2
+const { webSiteStore } = useWebSites();
+watch(webTitle, _.debounce(filterWebSites, 500));
 </script>
 <template>
     <div class="search-container">
         <div class="button" @click="setIsShow(true)">+</div>
         <div class="input">
-            <input type="text" name="" id="" placeholder="请输入关键字..." />
+            <input type="text" name="" id="" placeholder="请输入关键字..." v-model="webTitle" />
         </div>
     </div>
 </template>

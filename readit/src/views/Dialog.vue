@@ -2,7 +2,7 @@
  * @Author: shulu
  * @Date: 2023-04-07 16:22:35
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-17 21:57:48
+ * @LastEditTime: 2023-04-22 21:04:33
  * @Description: file content
  * @FilePath: \readit\src\views\Dialog.vue
 -->
@@ -10,14 +10,13 @@
 import useWebSiteStore from '@/store/websiteStore';
 import { inject, ref } from 'vue';
 const websiteStore = useWebSiteStore();
-const { isShow, setIsShow } = inject('dialog-show');
+const { webUrl, isShow, setIsShow } = inject('dialog-show');
 
-const url = ref('');
 const isSubmit = ref(false);
 const handleAddClick = async () => {
     isSubmit.value = true;
-    const result = await mainApi.sendUrl(url.value);
-    websiteStore.add(result);
+    const result = await mainApi.sendUrl(webUrl.value);
+    result && websiteStore.add(result);
     isSubmit.value = false;
     setIsShow(false);
 };
@@ -26,7 +25,7 @@ const handleAddClick = async () => {
     <div class="dialog-wrap" v-if="isShow">
         <div class="content">
             <div class="input">
-                <input type="text" name="" id="" v-model="url" placeholder="请输入网址" :disabled="isSubmit" />
+                <input type="text" name="" id="" v-model="webUrl" placeholder="请输入网址" :disabled="isSubmit" />
             </div>
             <div class="button">
                 <button class="add" @click="handleAddClick" :disabled="isSubmit">新增</button>

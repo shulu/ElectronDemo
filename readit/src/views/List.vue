@@ -2,35 +2,25 @@
  * @Author: shulu
  * @Date: 2023-04-07 17:30:50
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-18 21:54:27
+ * @LastEditTime: 2023-04-23 23:47:28
  * @Description: file content
  * @FilePath: \readit\src\views\List.vue
 -->
 <script setup lang="ts">
-import useWebSiteStore from '@/store/websiteStore';
-import { onMounted } from 'vue';
+import useWebSites from '@/controller/useWebSites';
 
-const websiteStore = useWebSiteStore();
-const changeSelected = (index: number) => {
-    websiteStore.nowSelected = index;
-};
-const removeWebsite = (item) => {
-    websiteStore.rmWebsites(item);
-};
-onMounted(() => {
-    websiteStore.initSites();
-});
+const { webSiteStore, changeSelected, removeWebsite } = useWebSites();
 </script>
 <template>
     <div class="all-item">
-        <div class="no-items" v-if="websiteStore.websites.length < 1">暂无数据</div>
+        <div class="no-items" v-if="webSiteStore.websites.length < 1">暂无数据</div>
         <div class="item" v-else>
             <div
                 class="read-item"
-                :class="{ selected: websiteStore.nowSelected == index }"
-                v-for="(ws, index) in websiteStore.websites"
+                :class="{ selected: webSiteStore.nowSelected == index }"
+                v-for="(ws, index) in webSiteStore.findWebsites"
                 :key="index"
-                @click="changeSelected(index)"
+                @click="changeSelected(index, ws.url)"
             >
                 <img :src="ws.screenShot" alt="" />
                 <h2>{{ ws.title }}</h2>
@@ -43,7 +33,7 @@ onMounted(() => {
 .all-item {
     margin-top: 60px;
 }
-.no-item {
+.no-items {
     font-weight: bold;
     color: silver;
     text-align: center;
