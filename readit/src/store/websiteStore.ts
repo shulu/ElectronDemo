@@ -2,7 +2,7 @@
  * @Author: shulu
  * @Date: 2023-04-17 21:17:06
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-23 23:31:31
+ * @LastEditTime: 2023-04-24 21:47:44
  * @Description: file content
  * @FilePath: \readit\src\store\websiteStore.ts
  */
@@ -21,14 +21,22 @@ const useWebSiteStore = defineStore('websiteStore', {
         return {
             websites: [] as IWebContens[],
             nowSelected: 0,
-            findName: '',
         };
     },
     getters: {
         findWebsites(state): IWebContens[] | any {
-            return state.findName.length > 0
-                ? state.websites.find((web) => (web.title = state.findName))
-                : state.websites;
+            return (titleName: string) => {
+                if (titleName !== '') {
+                    let pattern = new RegExp(titleName, 'i');
+                    const result = _.filter(state.websites, (item) => {
+                        return pattern.test(item.title);
+                    });
+                    return result;
+                    //return state.websites.filter((web) => web.title.toLowerCase().includes(titleName));
+                } else {
+                    return state.websites;
+                }
+            };
         },
     },
     actions: {

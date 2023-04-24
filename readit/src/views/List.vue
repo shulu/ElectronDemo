@@ -7,18 +7,20 @@
  * @FilePath: \readit\src\views\List.vue
 -->
 <script setup lang="ts">
+import { inject } from 'vue';
 import useWebSites from '@/controller/useWebSites';
 
 const { webSiteStore, changeSelected, removeWebsite } = useWebSites();
+const { keyword } = inject('dialog-show');
 </script>
 <template>
     <div class="all-item">
-        <div class="no-items" v-if="webSiteStore.websites.length < 1">暂无数据</div>
+        <div class="no-items" v-if="webSiteStore.findWebsites(keyword.value).length < 1">暂无数据</div>
         <div class="item" v-else>
             <div
                 class="read-item"
                 :class="{ selected: webSiteStore.nowSelected == index }"
-                v-for="(ws, index) in webSiteStore.findWebsites"
+                v-for="(ws, index) in webSiteStore.findWebsites(keyword.value)"
                 :key="index"
                 @click="changeSelected(index, ws.url)"
             >
