@@ -6,15 +6,16 @@
  * @Description: file content
  * @FilePath: \readit\src\main.js
  */
+import '@/assets/scss/common.scss';
+import router from '@/router/index.ts';
+import 'normalize.css';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import App from './App.vue';
-
-import '@/assets/scss/common.scss';
-import 'normalize.css';
 
 const pinia = createPinia();
 const app = createApp(App);
 
 app.use(pinia);
+app.use(router);
 app.mount('#app');

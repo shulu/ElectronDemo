@@ -2,13 +2,13 @@
  * @Author: shulu
  * @Date: 2023-04-07 17:30:50
  * @LastEditors: shulu
- * @LastEditTime: 2023-04-23 23:47:28
+ * @LastEditTime: 2023-05-03 16:17:15
  * @Description: file content
  * @FilePath: \readit\src\views\List.vue
 -->
 <script setup lang="ts">
-import { inject } from 'vue';
 import useWebSites from '@/controller/useWebSites';
+import { inject } from 'vue';
 
 const { webSiteStore, changeSelected, removeWebsite } = useWebSites();
 const { keyword } = inject('dialog-show');
@@ -26,15 +26,12 @@ const { keyword } = inject('dialog-show');
             >
                 <img :src="ws.screenShot" alt="" />
                 <h2>{{ ws.title }}</h2>
-                <button @click="removeWebsite(ws)">X</button>
+                <button @click.stop="removeWebsite(ws)">X</button>
             </div>
         </div>
     </div>
 </template>
 <style lang="scss">
-.all-item {
-    margin-top: 60px;
-}
 .no-items {
     font-weight: bold;
     color: silver;

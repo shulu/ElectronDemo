@@ -8,7 +8,7 @@
 -->
 <script setup lang="ts">
 import { provide, ref } from 'vue';
-import Home from './views/Home.vue';
+import Header from './views/Header.vue';
 const webUrl = ref('');
 const isShow = ref(false);
 const setIsShow = (val: boolean) => {
@@ -28,6 +28,7 @@ provide('dialog-show', {
 });
 </script>
 <template>
-    <Home />
+    <Header />
+    <router-view></router-view>
 </template>
 <style scoped lang="scss"></style>
