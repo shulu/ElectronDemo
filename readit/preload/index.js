@@ -2,7 +2,7 @@
  * @Author: shulu
  * @Date: 2023-04-07 23:33:53
  * @LastEditors: shulu
- * @LastEditTime: 2023-05-05 23:07:14
+ * @LastEditTime: 2023-05-07 16:19:42
  * @Description: file content
  * @FilePath: \readit\preload\index.js
  */
@@ -26,19 +26,19 @@ const imageList = () => {
     return result;
 };
 
-const showDialogMain = () => {
-    ipcRenderer.send('main-on-show-dialog-event', '1');
+const bindMainEvent = () => {
+    ipcRenderer.send('main-on-common-event');
 };
 
-const dialogShow = () => {
-    return ipcRenderer.on('on-dialog-show-event', (e, msg) => {
-        console.log(`output->msg`, msg);
+const dialogShow = (cb) => {
+    ipcRenderer.on('on-dialog-show-event', (e) => {
+        cb();
     });
 };
 
-const dialogTest = () => {
-    ipcRenderer.on('on-add-show-once', (_event, msg) => {
-        console.log(`output->msg`, msg);
+const navigateMan = (cb) => {
+    ipcRenderer.on('on-navigate-web-event', (_event, msg) => {
+        cb(msg);
     });
 };
 
@@ -47,7 +47,7 @@ contextBridge.exposeInMainWorld('mainApi', {
     showDialog,
     openUrl,
     imageList,
-    showDialogMain,
+    bindMainEvent,
     dialogShow,
-    dialogTest,
+    navigateMan,
 });

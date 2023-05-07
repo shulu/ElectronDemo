@@ -2,7 +2,7 @@
  * @Author: shulu
  * @Date: 2023-04-07 15:57:05
  * @LastEditors: shulu
- * @LastEditTime: 2023-05-05 18:01:18
+ * @LastEditTime: 2023-05-07 15:22:09
  * @Description: file content
  * @FilePath: \readit\src\views\SearchBar.vue
 -->
@@ -11,14 +11,14 @@ import useWebSites from '@/controller/useWebSites';
 import { inject, ref, watch } from 'vue';
 const { setIsShow, setKeyword } = inject('dialog-show');
 
-const props = defineProps<{
-    modelValue: string;
-}>();
-const emits = defineEmits(['update:modelValue']);
+// const props = defineProps<{
+//     modelValue: string;
+// }>();
+// const emits = defineEmits(['update:modelValue']);
 
 const handleClick = () => {
     setIsShow(true);
-    emits('update:modelValue', '');
+    // emits('update:modelValue', '');
 };
 // 方式1
 const { filterWebSites } = useWebSites();
@@ -29,12 +29,9 @@ const { filterWebSites } = useWebSites();
 //方式2
 const kw = ref('');
 watch(
-    [kw, () => props.modelValue],
-    ([kw, action]) => {
-        if (kw) filterWebSites(kw);
-        if (action == 'add') {
-            handleClick();
-        }
+    kw,
+    () => {
+        filterWebSites(kw.value);
     },
     { deep: true },
 );
